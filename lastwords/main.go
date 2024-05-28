@@ -12,30 +12,23 @@ func main() {
 	}
 
 	args := os.Args[1]
+
 	var words string
 
 	// checking if words is whitespaces.
-	check := false
-	for _, c := range args {
-		if c != ' ' {
-			check = true
-		}
-	}
-	if check {
-		for i := len(args) - 1; i >= 0; i-- {
-
-			if words == "" && string(args[i]) == " " {
-				continue
-			}
-			if words != "" && string(args[i]) == " " {
+	for i := len(args) - 1; i >= 0; i-- {
+		if args[i] != ' ' {
+			words = string(args[i]) + words
+		} else {
+			// If we encounter a space and we already have a word, break
+			if words != "" {
 				break
 			}
-			words = string(args[i]) + words
-
 		}
+	}
 		for _, ch := range words {
 			z01.PrintRune(ch)
 		}
 		z01.PrintRune('\n')
-	}
 }
+
