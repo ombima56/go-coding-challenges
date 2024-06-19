@@ -46,10 +46,10 @@ func PrintStr(s string) {
 }
 
 func Calculation(a, operator, b string) string {
-	value1, ok1 := Atoi(a)
-	value2, ok2 := Atoi(b)
+	value1, err1 := Atoi(a)
+	value2, err2 := Atoi(b)
 
-	if !ok1 || !ok2 {
+	if !err1 || !err2 {
 		return ""
 	}
 
