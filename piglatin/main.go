@@ -10,52 +10,32 @@ func main() {
 	if len(os.Args) != 2 {
 		return
 	}
+
 	args := os.Args[1]
-	vowels := "aeiouAEIOU"
-	if hasNoVowels(args, vowels) {
-		printChar("No vowels")
-		return
-	}
-	if isVowel(rune(args[0]), vowels) {
-		printChar(args + "ay")
-	} else {
-		index := firstVowelIndex(args, vowels)
-		if index != -1 {
-			printChar(args[index:] + args[:index] + "ay")
-		}
-	}
-}
+	result := pigLatin(args)
 
-func isVowel(ch rune, vowels string) bool {
-	for _, v := range vowels {
-		if ch == v {
-			return true
-		}
-	}
-	return false
-}
-
-func hasNoVowels(s, vowels string) bool {
-	for _, ch := range s {
-		if isVowel(ch, vowels) {
-			return false
-		}
-	}
-	return true
-}
-
-func firstVowelIndex(s, vowels string) int {
-	for i, ch := range s {
-		if isVowel(ch, vowels) {
-			return i
-		}
-	}
-	return -1
-}
-
-func printChar(s string) {
-	for _, ch := range s {
+	for _, ch := range result {
 		z01.PrintRune(ch)
 	}
 	z01.PrintRune('\n')
+}
+
+func isVowel(ch byte) bool {
+	return ch == 'a' || ch == 'e' || ch == 'i' || ch == 'o' || ch == 'u' || ch == 'A' || ch == 'E' || ch == 'I' || ch == 'O' || ch == 'U'
+}
+
+func pigLatin(word string) string {
+
+	//  Check if the word start with a vowel
+	if isVowel(word[0]) {
+		return word + "ay"
+	}
+
+	// Find the position of the first vowel
+	for i := 0; i < len(word); i++ {
+		if isVowel(word[i]) {
+			return word[i:] + word[:i] + "ay"
+		}
+	}
+	return "No Vowels"
 }
