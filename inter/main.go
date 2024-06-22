@@ -14,17 +14,20 @@ func main() {
 	args1 := os.Args[1]
 	args2 := os.Args[2]
 
+	// Maps to track seen characters and characters existing in the second string
 	seen := make(map[rune]bool)
-	exit := make(map[rune]bool)
+	exists := make(map[rune]bool)
 
-	for _, ch1 := range args2 {
-		exit[ch1] = true
+	// Populate the exists map with characters from the second string
+	for _, ch := range args2 {
+		exists[ch] = true
 	}
-	
-	for _, ch2 := range args1 {
-		if exit[ch2] && !seen[ch2] {
-			seen[ch2] = true
-			z01.PrintRune(ch2)
+
+	for _, ch := range args1 {
+		// If the character exists in the second string and has not been seen before
+		if exists[ch] && !seen[ch] {
+			seen[ch] = true
+			z01.PrintRune(ch)
 		}
 	}
 	z01.PrintRune('\n')
