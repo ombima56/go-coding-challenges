@@ -17,15 +17,16 @@ func IsPrime(n int) bool {
 }
 
 func FindPrevPrime(nb int) int {
-	for i := nb - 1; i >= 2; i-- {
-		if IsPrime(i) {
-			return i
-		}
+	if nb <= 1 {
+		return 0
 	}
-	return 0
+	if IsPrime(nb) {
+		return nb
+	}
+	return FindPrevPrime(nb - 1)
 }
 
 func main() {
-	fmt.Println(FindPrevPrime(28))
-	fmt.Println(FindPrevPrime(6))
+	fmt.Println(FindPrevPrime(5))
+	fmt.Println(FindPrevPrime(4))
 }
