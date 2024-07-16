@@ -47,7 +47,7 @@ func main() {
 			if working == "" {
 				working += r.working
 			} else {
-				working += "+" + r.rNumber
+				working += "+" + r.working
 			}
 			romanOutPut += r.rNumber
 			roman -= r.value
