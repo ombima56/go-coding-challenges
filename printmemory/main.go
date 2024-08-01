@@ -1,42 +1,52 @@
 package main
 
-import (
-	"unicode"
+import "fmt"
 
-	"github.com/01-edu/z01"
-)
+func main() {
+	PrintMemory([10]byte{'h'})
+}
 
 // PrintMemory prints the memory of the byte array in hex format and ASCII representation.
 func PrintMemory(arr [10]byte) {
-	// Helper function to print a byte in hex format
-	printHex := func(b byte) {
-		hexDigits := "0123456789abcdef"
-		z01.PrintRune(rune(hexDigits[b>>4]))
-		z01.PrintRune(rune(hexDigits[b&0x0F]))
-	}
-
-	// Print the memory in hexadecimal format
-	for i, b := range arr {
-		printHex(b)
-		if (i+1)%4 == 0 || i == len(arr)-1 {
-			z01.PrintRune('\n')
+	for i, ch := range arr {
+		if ch == '\x00' {
+			fmt.Print("00")
 		} else {
-			z01.PrintRune(' ')
+			fmt.Print(Hex(int(ch)))
+		}
+		if (i+1)%4 == 0 {
+			fmt.Println()
+		} else if i != len(arr)-1 {
+			fmt.Print(" ")
 		}
 	}
+	fmt.Println()
 
-	// Print the corresponding ASCII characters
-	for _, b := range arr {
-		if unicode.IsGraphic(rune(b)) {
-			z01.PrintRune(rune(b))
+	for _, ch := range arr {
+		if ch >= 32 && ch <= 126 {
+			fmt.Print(string(ch))
 		} else {
-			z01.PrintRune('.')
+			fmt.Print(".")
 		}
 	}
-
-	z01.PrintRune('\n')
+	fmt.Println()
 }
 
-func main() {
-	PrintMemory([10]byte{'h', 'e', 'l', 'l', 'o', 16, 21, '*'})
+func Hex(n int) string {
+	hex := "0123456789abcdef"
+	var str string
+	if n == 0 {
+		return "00"
+	}
+
+	for n > 0 {
+		rem := n % 16
+		str = string(hex[rem]) + str
+		n /= 16
+	}
+
+	if len(str) == 1 {
+		str = "0" + str
+	}
+	return str
 }
