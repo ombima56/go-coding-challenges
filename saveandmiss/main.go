@@ -12,21 +12,16 @@ func main() {
 }
 
 func SaveAndMiss(arg string, num int) string {
+	res := ""
 	if num <= 0 {
 		return arg
 	}
 
-	var result string
-	length := len(arg)
-
-	for i := 0; i < length; i += num {
-		end := i + num
-		if end > length {
-			end = length
+	for i, ch := range arg {
+		if (i/num)%2 == 0 {
+			res += string(ch)
 		}
-		result += arg[i:end]
-		i += num
 	}
 
-	return result
+	return res
 }
