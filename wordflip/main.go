@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"strings"
 )
 
 func main() {
@@ -12,17 +13,21 @@ func main() {
 }
 
 func WordFlip(str string) string {
+	if str == "" {
+		return "Invalid Output\n"
+	}
 	if len(str) == 0 {
-		return "Invalid Input"
+		return "\n"
+	}
+	// Trim leading and trailing spaces
+	str = strings.TrimSpace(str)
+
+	words := strings.Fields(str)
+
+	// Reverse the order of words
+	for i, j := 0, len(words)-1; i < j; i, j = i+1, j-1 {
+		words[i], words[j] = words[j], words[i]
 	}
 
-	var words string
-	for i := len(str) - 1; i >= 0; i-- {
-		if str[i] != ' ' {
-			words += string(str[i])
-		} else {
-			words += string(str[i])
-		}
-	}
-	return words + "\n"
+	return strings.Join(words, " ") + "\n"
 }
