@@ -1,6 +1,8 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+)
 
 func main() {
 	a := []string{"coding", "algorithm", "ascii", "package", "golang"}
@@ -16,28 +18,45 @@ func Slice(a []string, nbrs ...int) []string {
 		return a
 	}
 
-	fmt.Println(nbrs)
-
-	if nbrs[0] < 0 {
-		nbrs[0] += len(a)
+	start := nbrs[0]
+	if start < 0 {
+		start += len(a)
 	}
 
 	if len(nbrs) == 1 {
-		if nbrs[0] >= 0 && nbrs[0] < len(a) {
-			return []string{a[nbrs[0]]}
+		if start < 0 || start >= len(a) {
+			return nil
 		}
+		return a[start:]
+	}
+
+	end := nbrs[1]
+	if end < 0 {
+		end += len(a)
+	}
+
+	// Special case: if end is 0, return nil
+	if end == 0 {
 		return nil
 	}
 
-	if len(nbrs) == 2 {
-		if nbrs[1] < 0 {
-			nbrs[1] += len(a)
-		}
-		if nbrs[0] > nbrs[1] {
-			return nil
-		}
-		return a[nbrs[0] : nbrs[1]+1]
+	// Return empty slice if both indices are out of bounds but in correct order
+	if start < 0 && end <= 0 && start < end {
+		return []string{}
 	}
 
-	return a
+	// Ensure start and end are within bounds
+	if start < 0 {
+		start = 0
+	}
+	if end > len(a) {
+		end = len(a)
+	}
+
+	// Return nil if the range is invalid
+	if start >= end || start >= len(a) {
+		return nil
+	}
+
+	return a[start:end]
 }
