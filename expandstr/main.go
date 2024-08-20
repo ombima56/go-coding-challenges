@@ -1,7 +1,6 @@
 package main
 
 import (
-	"fmt"
 	"os"
 	"strings"
 
@@ -19,14 +18,12 @@ func main() {
 
 	var splitSpace []string
 	for _, ch := range words {
-		fmt.Println(string(ch))
 		if ch != "" {
 			splitSpace = append(splitSpace, ch)
 		}
 	}
 
 	result := strings.Join(splitSpace, "   ")
-	// fmt.Println(result)
 	for _, ch := range result {
 		z01.PrintRune(ch)
 	}
