@@ -2,7 +2,6 @@ package main
 
 import (
 	"os"
-	"strings"
 
 	"github.com/01-edu/z01"
 )
@@ -13,17 +12,31 @@ func main() {
 	}
 
 	args := os.Args[1]
+	var word []rune
+	var result []rune
+	inWord := false
 
-	words := strings.Split(args, " ")
-
-	var splitSpace []string
-	for _, ch := range words {
-		if ch != "" {
-			splitSpace = append(splitSpace, ch)
+	for _, ch := range args {
+		if ch != ' ' {
+			word = append(word, ch)
+			inWord = true
+		} else if inWord {
+			if len(result) > 0 {
+				result = append(result, ' ', ' ', ' ')
+			}
+			result = append(result, word...)
+			word = nil
+			inWord = false
 		}
 	}
 
-	result := strings.Join(splitSpace, "   ")
+	if inWord {
+		if len(result) > 0 {
+			result = append(result, ' ', ' ', ' ')
+		}
+		result = append(result, word...)
+	}
+
 	for _, ch := range result {
 		z01.PrintRune(ch)
 	}
