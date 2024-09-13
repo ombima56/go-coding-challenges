@@ -8,7 +8,7 @@ func Atoi(s string) int {
 		if i == 0 && r == '+' {
 			sign = 1
 		} else if i == 0 && r == '-' {
-			sign = 1
+			sign = -1
 		} else if r >= '0' && r <= '9' {
 			number = number*10 + int(r-'0')
 		} else {
