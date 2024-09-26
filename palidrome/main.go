@@ -2,6 +2,7 @@ package main
 
 import (
 	"bufio"
+	"fmt"
 	"log"
 	"os"
 )
@@ -23,5 +24,11 @@ func main() {
 
 	for scanner.Scan() {
 		line := scanner.Text()
+
+		if Palidrome(line) {
+			fmt.Printf("%q is a palidrome.\n", line)
+		} else {
+			fmt.Printf("%q is not a palidrome.\n", line)
+		}
 	}
 }
