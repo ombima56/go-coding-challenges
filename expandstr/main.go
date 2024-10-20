@@ -12,7 +12,7 @@ func main() {
 	}
 
 	args := os.Args[1]
-	result := ExandStr(args)
+	result := ExpandStr(args)
 
 	for _, ch := range result {
 		z01.PrintRune(ch)
@@ -20,7 +20,7 @@ func main() {
 	z01.PrintRune('\n')
 }
 
-func ExandStr(s string) string {
+func ExpandStr(s string) string {
 	spaceNeeded := false // Tracks if we need to add a space before a new word
 	wordStarted := false // Tracks if we're inside a word
 	// var result string
