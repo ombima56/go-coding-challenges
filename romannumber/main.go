@@ -9,7 +9,7 @@ var Roman = []struct {
 	rNumber string
 	working string
 }{
-	{1000, "M", "m"},
+	{1000, "M", "M"},
 	{900, "CM", "(M-C)"},
 	{500, "D", "D"},
 	{400, "CD", "(D-C)"},
