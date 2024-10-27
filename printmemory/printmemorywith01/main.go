@@ -37,12 +37,10 @@ func PrintMemory(arr [10]byte) {
 			z01.PrintRune(' ')
 		}
 	}
-	if len(arr)-1 != 0 {
-		z01.PrintRune('\n')
-	}
+	z01.PrintRune('\n')
 
 	for _, ch := range arr {
-		if ch > 32 && ch <= 126 {
+		if ch >= 32 && ch <= 126 {
 			z01.PrintRune(rune(ch))
 		} else {
 			z01.PrintRune('.')
