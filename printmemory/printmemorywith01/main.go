@@ -1,13 +1,5 @@
 package main
 
-// import (
-// 	"github.com/01-edu/z01"
-// )
-
-// func main() {
-// 	PrintMemory([10]byte{'h', 'e', 'l', 'l', 'o', 16, 21, '*'})
-// }
-
 import (
 	"github.com/01-edu/go-tests/lib/challenge"
 	"github.com/01-edu/go-tests/lib/random"
