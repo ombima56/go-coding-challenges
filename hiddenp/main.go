@@ -23,6 +23,7 @@ func main() {
 		}
 		pos2++
 	}
+	
 	if pos1 == len(args1) {
 		z01.PrintRune('1')
 	} else {
