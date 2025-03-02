@@ -12,37 +12,40 @@ func main() {
 }
 
 func Slice(a []string, nbrs ...int) []string {
-	start := 0
-	end := len(a)
+	var start, end = 0, len(a)
 
 	if len(nbrs) > 0 {
-		start = nbrs[0]
-		if start > len(a) {
-			start = len(a)
-		}
-		if start < 0 {
-			start = start + len(a)
-		}
-		if start < 0 {
-			start = 0
-		}
+		start = clampIndex(nbrs[0], len(a))
 	}
 
 	if len(nbrs) > 1 {
-		end = nbrs[1]
-		if end > len(a) {
-			end = len(a)
-		}
-		if end < 0 {
-			end = end + len(a)
-		}
-		if end < 0 {
-			end = 0
-		}
-		if start > end {
-			return nil
-		}
+		end = clampIndex(nbrs[1], len(a))
+	}
+
+	if start > end {
+		return nil
 	}
 
 	return a[start:end]
+}
+
+func clampIndex(idx, length int) int {
+	if idx < 0 {
+		idx += length
+	}
+	return max(0, min(idx, length))
+}
+
+func min(a, b int) int {
+	if a < b {
+		return a
+	}
+	return b
+}
+
+func max(a, b int) int {
+	if a > b {
+		return a
+	}
+	return b
 }
